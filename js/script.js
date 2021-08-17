@@ -26,63 +26,64 @@ for (let i = 0; i < nodeList.length; i++) {
             digito = '';
         } else if (hasClass(nodeList[i], 'num1')) {
             num = 1;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'num2')) {
             num = 2;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'num3')) {
             num = 3;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'num4')) {
             num = 4;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'num5')) {
             num = 5;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'num6')) {
             num = 6;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'num7')) {
             num = 7;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'num8')) {
             num = 8;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'num9')) {
             num = 9;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'zero')) {
             num = 0;
-            digito += `${num} `;
+            digito += `${num}`;
             total = num;
         } else if (hasClass(nodeList[i], 'soma')) {
-            digito += `+ `;
+            digito += ` + `;
             total += num;
         } else if (hasClass(nodeList[i], 'sub')) {
-            digito += `- `;
+            digito += ` - `;
             total -= num;
         } else if (hasClass(nodeList[i], 'multi')) {
-            digito += `X `;
+            digito += ` X `;
             total *= num;
         } else if (hasClass(nodeList[i], 'divisao')) {
-            digito += `/ `;
+            digito += ` / `;
             total = num;
         } else if (hasClass(nodeList[i], 'porcentagem')) {
-            digito += `% `;
+            digito += ` % `;
             total = num;
         } else if (hasClass(nodeList[i], 'parenteses')) {
-            digito += `( )`;
+            digito += ` ( ) `;
             total = num;
-        } else if (hasClass(nodeList[i], 'total')) {
+        } else if (hasClass(nodeList[i], 'virgula')) {
+            digito += `.`;
         }
 
         resultado.textContent = digito;
