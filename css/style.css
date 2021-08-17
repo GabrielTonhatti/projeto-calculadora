@@ -1,0 +1,79 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto";
+    margin: 100px auto;
+    background: #414450;
+}
+
+li {
+    list-style: none;
+}
+
+.calc {
+    margin: 500px auto;
+    margin: 0 auto;
+    width: 400px;
+    height: 550px;
+    border: 4px solid #222;
+    background-color:#2a2d36;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.painel {
+    margin: 20px auto;
+    /*text-align: right;*/
+    width: 380px;
+    height: 90px;
+    border: 2px solid #222;
+    background-color: #22252d;
+    border-radius: 15px;
+    color: #fff;
+}
+
+#resultado {
+    position:inherit;
+    padding: 15px;
+    float: right;
+    margin-top: 35px;
+    font-size: 26px;
+}
+
+.botoes {
+    margin: 0 auto;
+    margin-top: 40px;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+
+.botao {
+    text-align: center;
+    width: 80px;
+    height: 60px;
+    margin-bottom: 10px;
+    background-color: #2d3036;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+.clear {
+    color: #ef7a80;
+}
+
+.parenteses, .porcentagem, .divisao, .multi, .sub, .soma {
+    color: #00c24f;
+}
+
+.total {
+    background-color: #00c24f;
+}
