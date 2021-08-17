@@ -92,5 +92,6 @@ for (let i = 0; i < nodeList.length; i++) {
     }, false);
 }
 valorFinal.addEventListener('click', function () {
+    digito = total;
     resultado.textContent = total;
 }, false)
