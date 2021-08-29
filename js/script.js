@@ -1,97 +1,96 @@
 const clear = document.querySelector('.clear');
 const resultado = document.getElementById('resultado');
 const nodeList = document.querySelectorAll('li');
-const nodeListNums = document.querySelectorAll('.numeros');
 const valorFinal = document.querySelector('.total');
 let num = 0;
+let num2 = '';
+let num3 = 0;
 let digito = '';
 let total = 0;
-
-console.log(nodeList);
-console.log(nodeListNums);
-
-clear.addEventListener('click', function () {
-    digito = '';
-}, false);
+let operadores = ['+', '-', '/', 'X'];
+const valorInnerText = [];
 
 function hasClass(element, className) {
     return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
 }
 
-for (let i = 0; i < nodeList.length; i++) {
-    console.log(hasClass(nodeList[i], 'clear'));
+function isFloat(element) {
+    for (let i = 0; i < element.length; i++) {
+        if (element[i] === '.') {
+            return true;
+        }
+    }
+}
 
+console.log(nodeList);
+
+nodeList.forEach(item => {
+    valorInnerText.push(item.innerText);
+});
+
+console.log(valorInnerText);
+
+clear.addEventListener('click', function () {
+    digito = '';
+}, false);
+
+for (let i = 0; i < nodeList.length; i++) {
     nodeList[i].addEventListener('click', function () {
-        if (hasClass(nodeList[i], 'clear')) {
-            digito = '';
-        } else if (hasClass(nodeList[i], 'num1')) {
-            num = 1;
+        if (!isNaN(valorInnerText[i])) {
+            num = valorInnerText[i];
+            num2 += num;
             digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'num2')) {
-            num = 2;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'num3')) {
-            num = 3;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'num4')) {
-            num = 4;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'num5')) {
-            num = 5;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'num6')) {
-            num = 6;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'num7')) {
-            num = 7;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'num8')) {
-            num = 8;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'num9')) {
-            num = 9;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'zero')) {
-            num = 0;
-            digito += `${num}`;
-            total = num;
-        } else if (hasClass(nodeList[i], 'soma')) {
-            digito += ` + `;
-            total += num;
-        } else if (hasClass(nodeList[i], 'sub')) {
-            digito += ` - `;
-            total -= num;
-        } else if (hasClass(nodeList[i], 'multi')) {
-            digito += ` X `;
-            total *= num;
+            if (isFloat(num2)) {
+                num3 = parseFloat(num2);
+            } else {
+                num3 = parseInt(num2);
+            }
+        }
+
+        if (hasClass(nodeList[i], 'porcentagem')) {
+            digito += `% `;
         } else if (hasClass(nodeList[i], 'divisao')) {
             digito += ` / `;
-            total = num;
-        } else if (hasClass(nodeList[i], 'porcentagem')) {
-            digito += ` % `;
-            total = num;
-        } else if (hasClass(nodeList[i], 'parenteses')) {
-            digito += ` ( ) `;
-            total = num;
+        } else if (hasClass(nodeList[i], 'multi')) {
+            digito += ` X `;
+        } else if (hasClass(nodeList[i], 'sub')) {
+            digito += ` - `;
+        } else if (hasClass(nodeList[i], 'soma')) {
+            digito += ` + `;
         } else if (hasClass(nodeList[i], 'virgula')) {
             digito += `.`;
         }
 
         resultado.textContent = digito;
-        console.log(total);
+        console.log("Digito: ", digito);
+        console.log("Num: ", num);
+        console.log("Num2: ", num2);
 
     }, false);
 }
+
 valorFinal.addEventListener('click', function () {
-    digito = total;
+    if (digito.indexOf("%") !== -1) {
+        console.log(digito.indexOf("%"))
+        for (let j = 0; j < operadores.length; j++) {
+            if (digito.indexOf(operadores[j]) !== -1) {
+                let porcentagem = parseFloat(digito.substring(0, digito.indexOf(operadores[j]) - 1));
+                let num4 = parseFloat(digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
+                console.log("De: ", digito.indexOf(operadores[j]) + 1);
+                console.log("até: ", digito.indexOf("%") - 1);
+                console.log("Tamanho", digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")))
+                console.log(num4);
+                console.log(porcentagem);
+                digito = digito.replace(num4 + "%", `(${porcentagem} * (${num4} / 100))`);
+                console.log(digito);
+                break;
+            }
+        }
+    }
+
+    total = digito.replace('X', '*');
+    total = eval(total);
     resultado.textContent = total;
-}, false)
+    digito = '';
+    console.log(resultado)
+}, false);
