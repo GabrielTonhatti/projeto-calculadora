@@ -7,7 +7,7 @@ let num2 = '';
 let num3 = 0;
 let digito = '';
 let total = 0;
-let operadores = ['+', '-', '/', 'X'];
+let operadores = ['+', '-', '/'];
 const valorInnerText = [];
 
 function hasClass(element, className) {
@@ -73,9 +73,18 @@ valorFinal.addEventListener('click', function () {
     if (digito.indexOf("%") !== -1) {
         console.log(digito.indexOf("%"))
         for (let j = 0; j < operadores.length; j++) {
-            if (digito.indexOf(operadores[j]) !== -1) {
-                let porcentagem = parseFloat(digito.substring(0, digito.indexOf(operadores[j]) - 1));
-                let num4 = parseFloat(digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
+            let porcentagem;
+            let num4;
+            if(digito.indexOf("X") !== -1) {
+                porcentagem = parseFloat(digito.substring(0, digito.indexOf('X') - 1));
+                num4 = parseFloat(digito.substring(digito.indexOf("X") + 1, digito.indexOf("%")));
+                console.log(num4);
+                console.log(porcentagem);
+                digito = `${porcentagem} * (${num4} / 100)`;
+                console.log(digito)
+            }else if (digito.indexOf(operadores[j]) !== -1) {
+                porcentagem = parseFloat(digito.substring(0, digito.indexOf(operadores[j]) - 1));
+                num4 = parseFloat(digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
                 console.log("De: ", digito.indexOf(operadores[j]) + 1);
                 console.log("até: ", digito.indexOf("%") - 1);
                 console.log("Tamanho", digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")))
