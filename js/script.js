@@ -66,6 +66,7 @@ for (let i = 0; i < nodeList.length; i++) {
         console.log("Num: ", num);
         console.log("Num2: ", num2);
 
+        this.blur();
     }, false);
 }
 
@@ -102,4 +103,5 @@ valorFinal.addEventListener('click', function () {
     resultado.textContent = total;
     digito = '';
     console.log(resultado)
+    this.blur();
 }, false);
