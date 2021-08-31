@@ -3,6 +3,7 @@ const resultado = document.getElementById('resultado');
 const nodeList = document.querySelectorAll('li');
 const valorFinal = document.querySelector('.total');
 const del = document.getElementsByClassName('botao-delete');
+const ultimoCalculo = document.getElementById('calculo');
 const valorInnerText = [];
 let num = 0;
 let num2 = '';
@@ -33,6 +34,7 @@ console.log(valorInnerText);
 
 clear.addEventListener('click', function () {
     digito = '';
+    ultimoCalculo.textContent = '';
 }, false);
 
 for (let i = 0; i < nodeList.length; i++) {
@@ -53,7 +55,7 @@ for (let i = 0; i < nodeList.length; i++) {
         } else if (hasClass(nodeList[i], 'divisao')) {
             digito += ` / `;
         } else if (hasClass(nodeList[i], 'multi')) {
-            digito += ` X `;
+            digito += ` * `;
         } else if (hasClass(nodeList[i], 'sub')) {
             digito += ` - `;
         } else if (hasClass(nodeList[i], 'soma')) {
@@ -62,11 +64,11 @@ for (let i = 0; i < nodeList.length; i++) {
             digito += `.`;
         }
 
-        if(hasClass(nodeList[i], 'parenteses')) {
-            if(digito.indexOf('(') === -1) {
-                digito += ' (';
-            } else if(digito.indexOf(')') === -1) {
-                digito  += ') ';
+        if (hasClass(nodeList[i], 'parenteses')) {
+            if (digito.indexOf('(') === -1) {
+                digito += '(';
+            } else if (digito.indexOf(')') === -1) {
+                digito += ')';
             }
         }
 
@@ -78,18 +80,12 @@ for (let i = 0; i < nodeList.length; i++) {
     }, false);
 }
 
-del[0].addEventListener('click', function () {
-    digito = digito.slice(0, (digito.length - 1));
-    resultado.textContent = digito;
-    console.log(digito)
-}, false);
-
 console.log(del)
 
 valorFinal.addEventListener('click', function () {
 
     if (digito.indexOf("%") !== -1) {
-        
+
         console.log(digito.indexOf("%"));
 
         for (let j = 0; j < operadores.length; j++) {
@@ -97,7 +93,7 @@ valorFinal.addEventListener('click', function () {
             let porcentagem;
             let num4;
 
-            if(digito.indexOf("X") !== -1) {
+            if (digito.indexOf("X") !== -1) {
 
                 porcentagem = parseFloat(digito.substring(0, digito.indexOf('X') - 1));
                 num4 = parseFloat(digito.substring(digito.indexOf("X") + 1, digito.indexOf("%")));
@@ -109,7 +105,7 @@ valorFinal.addEventListener('click', function () {
 
                 console.log(digito);
 
-            }else if (digito.indexOf(operadores[j]) !== -1) {
+            } else if (digito.indexOf(operadores[j]) !== -1) {
                 porcentagem = parseFloat(digito.substring(0, digito.indexOf(operadores[j]) - 1));
                 num4 = parseFloat(digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
 
@@ -127,9 +123,16 @@ valorFinal.addEventListener('click', function () {
         }
     }
 
-    total = digito.replace('X', '*');
+    ultimoCalculo.textContent = digito;
+    total = digito;
     total = eval(total);
-    resultado.textContent = total;
     digito = total;
+    resultado.textContent = total;
     console.log(resultado);
+}, false);
+
+del[0].addEventListener('click', function () {
+    digito = digito.slice(0, (digito.length - 1));
+    resultado.textContent = digito;
+    console.log(digito)
 }, false);

@@ -38,13 +38,19 @@ li {
     color: #fff;
 }
 
+#calculo {
+    font-size: 20px;
+    padding: 15px;
+    color: #747c86;
+}
+
 #resultado {
     width: 370px;
     overflow: hidden;
     position:inherit;
     padding: 15px;
     float: right;
-    margin-top: 35px;
+    margin-top: 5px;
     font-size: 26px;
 }
 
@@ -77,6 +83,10 @@ li {
     background-color: #2d3036;
     border-radius: 50px;
     padding: 10px;
+}
+
+.zero {
+    width: 180px;
 }
 
 .clear {
