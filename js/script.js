@@ -53,13 +53,13 @@ for (let i = 0; i < nodeList.length; i++) {
         if (hasClass(nodeList[i], 'porcentagem')) {
             digito += `% `;
         } else if (hasClass(nodeList[i], 'divisao')) {
-            digito += ` / `;
+            digito += `/`;
         } else if (hasClass(nodeList[i], 'multi')) {
-            digito += ` * `;
+            digito += `*`;
         } else if (hasClass(nodeList[i], 'sub')) {
-            digito += ` - `;
+            digito += `-`;
         } else if (hasClass(nodeList[i], 'soma')) {
-            digito += ` + `;
+            digito += `+`;
         } else if (hasClass(nodeList[i], 'virgula')) {
             digito += `.`;
         }
