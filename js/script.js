@@ -2,6 +2,7 @@ const clear = document.querySelector('.clear');
 const resultado = document.getElementById('resultado');
 const nodeList = document.querySelectorAll('li');
 const valorFinal = document.querySelector('.total');
+const del = document.getElementsByClassName('botao-delete');
 const valorInnerText = [];
 let num = 0;
 let num2 = '';
@@ -76,6 +77,14 @@ for (let i = 0; i < nodeList.length; i++) {
 
     }, false);
 }
+
+del[0].addEventListener('click', function () {
+    digito = digito.slice(0, (digito.length - 1));
+    resultado.textContent = digito;
+    console.log(digito)
+}, false);
+
+console.log(del)
 
 valorFinal.addEventListener('click', function () {
 

@@ -48,9 +48,20 @@ li {
     font-size: 26px;
 }
 
+.botao-delete {
+    margin: 0;
+    float: right;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.botao-delete img {
+    width: 40px;
+}
+
 .botoes {
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 20px;
     width: 95%;
     display: flex;
     justify-content: space-between;
