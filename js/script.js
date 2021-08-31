@@ -61,6 +61,14 @@ for (let i = 0; i < nodeList.length; i++) {
             digito += `.`;
         }
 
+        if(hasClass(nodeList[i], 'parenteses')) {
+            if(digito.indexOf('(') === -1) {
+                digito += ' (';
+            } else if(digito.indexOf(')') === -1) {
+                digito  += ') ';
+            }
+        }
+
         resultado.textContent = digito;
         console.log("Digito: ", digito);
         console.log("Num: ", num);
@@ -113,6 +121,6 @@ valorFinal.addEventListener('click', function () {
     total = digito.replace('X', '*');
     total = eval(total);
     resultado.textContent = total;
-    digito = '';
+    digito = total;
     console.log(resultado);
 }, false);
