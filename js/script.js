@@ -2,13 +2,13 @@ const clear = document.querySelector('.clear');
 const resultado = document.getElementById('resultado');
 const nodeList = document.querySelectorAll('li');
 const valorFinal = document.querySelector('.total');
+const valorInnerText = [];
 let num = 0;
 let num2 = '';
 let num3 = 0;
 let digito = '';
 let total = 0;
 let operadores = ['+', '-', '/'];
-const valorInnerText = [];
 
 function hasClass(element, className) {
     return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
@@ -70,27 +70,40 @@ for (let i = 0; i < nodeList.length; i++) {
 }
 
 valorFinal.addEventListener('click', function () {
+
     if (digito.indexOf("%") !== -1) {
-        console.log(digito.indexOf("%"))
+        
+        console.log(digito.indexOf("%"));
+
         for (let j = 0; j < operadores.length; j++) {
+
             let porcentagem;
             let num4;
+
             if(digito.indexOf("X") !== -1) {
+
                 porcentagem = parseFloat(digito.substring(0, digito.indexOf('X') - 1));
                 num4 = parseFloat(digito.substring(digito.indexOf("X") + 1, digito.indexOf("%")));
+
                 console.log(num4);
                 console.log(porcentagem);
+
                 digito = `${porcentagem} * (${num4} / 100)`;
-                console.log(digito)
+
+                console.log(digito);
+
             }else if (digito.indexOf(operadores[j]) !== -1) {
                 porcentagem = parseFloat(digito.substring(0, digito.indexOf(operadores[j]) - 1));
                 num4 = parseFloat(digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
+
                 console.log("De: ", digito.indexOf(operadores[j]) + 1);
                 console.log("até: ", digito.indexOf("%") - 1);
-                console.log("Tamanho", digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")))
+                console.log("Tamanho", digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
                 console.log(num4);
                 console.log(porcentagem);
+
                 digito = digito.replace(num4 + "%", `(${porcentagem} * (${num4} / 100))`);
+
                 console.log(digito);
                 break;
             }
@@ -101,5 +114,5 @@ valorFinal.addEventListener('click', function () {
     total = eval(total);
     resultado.textContent = total;
     digito = '';
-    console.log(resultado)
+    console.log(resultado);
 }, false);
