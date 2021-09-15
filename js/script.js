@@ -5,12 +5,13 @@ const valorFinal = document.querySelector('.total');
 const del = document.getElementsByClassName('botao-delete');
 const ultimoCalculo = document.getElementById('calculo');
 const valorInnerText = [];
+const teclado = document.body;
 let num = 0;
 let num2 = '';
 let num3 = 0;
 let digito = '';
 let total = 0;
-let operadores = ['+', '-', '/'];
+let operadores = ['+', '-'];
 
 function hasClass(element, className) {
     return (' ' + element.className + ' ').indexOf(' ' + className + ' ') > -1;
@@ -22,6 +23,73 @@ function isFloat(element) {
             return true;
         }
     }
+}
+
+function calc() {
+
+    if (digito.indexOf("%") !== -1) {
+
+        console.log(digito.indexOf("%"));
+
+        let porcentagem;
+        let num4;
+
+        if (digito.indexOf("*") !== -1) {
+
+            console.log("digito: ", digito);
+            console.log('teste: ', digito.substring(digito.indexOf("*") + 1, digito.indexOf("%")));
+            porcentagem = parseFloat(digito.substring(0, digito.indexOf('*')));
+            num4 = parseFloat(digito.substring(digito.indexOf("*") + 1, digito.indexOf("%")));
+
+
+            console.log("num4:", num4);
+            console.log("porcentagem:", porcentagem);
+
+            digito = `${porcentagem} * (${num4} / 100)`;
+
+            console.log(digito);
+
+        } else if (digito.indexOf("/") !== -1) {
+            console.log("digito: ", digito);
+            console.log('teste: ', digito.substring(digito.indexOf("/") + 1, digito.indexOf("%")));
+            porcentagem = parseFloat(digito.substring(0, digito.indexOf('/')));
+            num4 = parseFloat(digito.substring(digito.indexOf("/") + 1, digito.indexOf("%")));
+
+
+            console.log("num4:", num4);
+            console.log("porcentagem:", porcentagem);
+
+            digito = `${porcentagem} / (${num4} / 100)`;
+
+            console.log(digito);
+        }
+
+        for (let j = 0; j < operadores.length; j++) {
+
+            if (digito.indexOf(operadores[j]) !== -1) {
+                porcentagem = parseFloat(digito.substring(0, digito.indexOf(operadores[j])));
+                num4 = parseFloat(digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
+
+                console.log("De: ", digito.indexOf(operadores[j]) + 1);
+                console.log("até: ", digito.indexOf("%") - 1);
+                console.log("Tamanho", digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
+                console.log(num4);
+                console.log(porcentagem);
+
+                digito = digito.replace(num4 + "%", `(${porcentagem} * (${num4} / 100))`);
+
+                console.log(digito);
+                break;
+            }
+        }
+    }
+
+    ultimoCalculo.textContent = digito;
+    total = digito;
+    total = eval(total);
+    digito = total;
+    resultado.textContent = total;
+    console.log(resultado);
 }
 
 console.log(nodeList);
@@ -80,59 +148,65 @@ for (let i = 0; i < nodeList.length; i++) {
     }, false);
 }
 
-console.log(del)
+teclado.addEventListener('keydown', function (event) {
+    const key = event.key;
+    const code = event.keyCode;
 
-valorFinal.addEventListener('click', function () {
-
-    if (digito.indexOf("%") !== -1) {
-
-        console.log(digito.indexOf("%"));
-
-        for (let j = 0; j < operadores.length; j++) {
-
-            let porcentagem;
-            let num4;
-
-            if (digito.indexOf("X") !== -1) {
-
-                porcentagem = parseFloat(digito.substring(0, digito.indexOf('X') - 1));
-                num4 = parseFloat(digito.substring(digito.indexOf("X") + 1, digito.indexOf("%")));
-
-                console.log(num4);
-                console.log(porcentagem);
-
-                digito = `${porcentagem} * (${num4} / 100)`;
-
-                console.log(digito);
-
-            } else if (digito.indexOf(operadores[j]) !== -1) {
-                porcentagem = parseFloat(digito.substring(0, digito.indexOf(operadores[j]) - 1));
-                num4 = parseFloat(digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
-
-                console.log("De: ", digito.indexOf(operadores[j]) + 1);
-                console.log("até: ", digito.indexOf("%") - 1);
-                console.log("Tamanho", digito.substring(digito.indexOf(operadores[j]) + 1, digito.indexOf("%")));
-                console.log(num4);
-                console.log(porcentagem);
-
-                digito = digito.replace(num4 + "%", `(${porcentagem} * (${num4} / 100))`);
-
-                console.log(digito);
-                break;
-            }
+    for (let i = 0; i < valorInnerText.length; i++) {
+        if (key === valorInnerText[i] && key !== "=" && key !== ",") {
+            digito += `${valorInnerText[i]}`;
         }
     }
 
-    ultimoCalculo.textContent = digito;
-    total = digito;
-    total = eval(total);
-    digito = total;
-    resultado.textContent = total;
-    console.log(resultado);
+    if (code === 8) {
+        digito = digito.slice(0, (digito.length - 1));
+    }
+
+    if (code === 46) {
+        digito = '';
+    }
+
+    if (code === 111 || code === 191) {
+        digito += `/`;
+    }
+
+    if (code === 106) {
+        digito += `*`;
+    }
+
+    if (code === 56) {
+        digito += `*`;
+    }
+
+    if (code === 13) {
+        calc();
+    }
+
+    if (code === 57) {
+        digito += `(`;
+    }
+
+    if (code === 48) {
+        digito += `)`;
+    }
+
+    if (code === 188 || code === 190 || code === 108) {
+        digito += `.`;
+    }
+
+    console.log(digito);
+    console.log(event.keyCode);
+
+    resultado.textContent = digito;
+
 }, false);
+
+valorFinal.addEventListener('click', calc, false);
 
 del[0].addEventListener('click', function () {
     digito = digito.slice(0, (digito.length - 1));
     resultado.textContent = digito;
     console.log(digito)
 }, false);
+
+console.log(del);
