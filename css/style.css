@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: "Roboto";
+    font-family: "Roboto", serif;
     margin: 100px auto;
     background: #414450;
 }
@@ -85,6 +85,10 @@ li {
     padding: 10px;
 }
 
+.botao:hover{
+    background-color: #383b42;
+}
+
 .zero {
     width: 180px;
 }
@@ -99,4 +103,8 @@ li {
 
 .total {
     background-color: #00c24f;
+}
+
+.total:hover{
+    background-color: #17d05e;
 }
