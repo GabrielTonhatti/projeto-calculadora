@@ -159,6 +159,7 @@ teclado.addEventListener('keydown', function (event) {
     }
 
     if (code === 8) {
+        digito += "";
         digito = digito.slice(0, (digito.length - 1));
     }
 
@@ -204,6 +205,8 @@ teclado.addEventListener('keydown', function (event) {
 valorFinal.addEventListener('click', calc, false);
 
 del[0].addEventListener('click', function () {
+    console.log(digito);
+    digito += "";
     digito = digito.slice(0, (digito.length - 1));
     resultado.textContent = digito;
     console.log(digito)
