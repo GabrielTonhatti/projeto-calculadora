@@ -5,6 +5,7 @@ const valorFinal = document.querySelector('.total');
 const del = document.getElementsByClassName('botao-delete');
 const ultimoCalculo = document.getElementById('calculo');
 const negativoPositivo = document.querySelector('.negativo-positivo');
+const painel = document.getElementById('panel');
 const valorInnerText = [];
 const teclado = document.body;
 let num = 0;
@@ -23,6 +24,17 @@ function isFloat(element) {
         if (element[i] === '.') {
             return true;
         }
+    }
+}
+
+function adicionarScroll() {
+    if (digito.length >= 24 || ultimoCalculo.length >= 24) {
+        console.log('Scroll')
+        painel.style.overflowX = 'scroll';
+        painel.style.height = '100px';
+    } else if (digito.length <= 24 || ultimoCalculo.length <= 24) {
+        painel.style.overflowX = 'hidden';
+        painel.style.height = '90px';
     }
 }
 
@@ -90,6 +102,8 @@ function calc() {
     total = eval(total);
     digito = total;
     resultado.textContent = total;
+
+
     console.log(resultado);
 }
 
@@ -140,6 +154,8 @@ for (let i = 0; i < nodeList.length; i++) {
                 digito += ')';
             }
         }
+
+        adicionarScroll();
 
         resultado.textContent = digito;
         console.log("Digito: ", digito);
@@ -199,6 +215,8 @@ teclado.addEventListener('keydown', function (event) {
     console.log(digito);
     console.log(event.keyCode);
 
+    adicionarScroll();
+
     resultado.textContent = digito;
 
 }, false);
@@ -215,6 +233,7 @@ del[0].addEventListener('click', function () {
 
 negativoPositivo.addEventListener('click', () => {
 
+    digito += '';
     if (digito.indexOf('-') !== -1) {
         digito = digito.substring(1);
     } else {

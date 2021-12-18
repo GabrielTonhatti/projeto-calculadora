@@ -37,7 +37,20 @@ li {
     border-radius: 15px;
     color: #fff;
     overflow: hidden;
+}
 
+.painel::-webkit-scrollbar {
+    height: 12px;
+}
+
+.painel::-webkit-scrollbar-track {
+    background: #22252d;
+}
+
+.painel::-webkit-scrollbar-thumb {
+    background-color: #00c24f;
+    border-radius: 20px;
+    border: 3px solid #22252d;
 }
 
 #calculo {
