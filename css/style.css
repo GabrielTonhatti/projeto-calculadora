@@ -90,8 +90,19 @@ li {
     background-color: #383b42;
 }
 
-.zero {
-    width: 180px;
+
+.negativo-positivo {
+    text-align: center;
+    width: 80px;
+    height: 60px;
+    margin-bottom: 10px;
+    background-color: #2d3036;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+.negativo-positivo:hover {
+    background-color: #383b42;
 }
 
 .clear {

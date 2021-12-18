@@ -1,9 +1,10 @@
 const clear = document.querySelector('.clear');
 const resultado = document.getElementById('resultado');
-const nodeList = document.querySelectorAll('li');
+const nodeList = document.querySelectorAll('.botao');
 const valorFinal = document.querySelector('.total');
 const del = document.getElementsByClassName('botao-delete');
 const ultimoCalculo = document.getElementById('calculo');
+const negativoPositivo = document.querySelector('.negativo-positivo');
 const valorInnerText = [];
 const teclado = document.body;
 let num = 0;
@@ -210,6 +211,18 @@ del[0].addEventListener('click', function () {
     digito = digito.slice(0, (digito.length - 1));
     resultado.textContent = digito;
     console.log(digito)
+}, false);
+
+negativoPositivo.addEventListener('click', () => {
+
+    if (digito.indexOf('-') !== -1) {
+        digito = digito.substring(1);
+    } else {
+        digito = '-' + digito;
+    }
+
+    resultado.textContent = digito;
+
 }, false);
 
 console.log(del);
